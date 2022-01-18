@@ -75,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               onTap: () {
                 authMethod.signout();
+                helpermethod.saveuserloggedinsharedpreference(false);
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const Authenticate()));
               }
               ) 

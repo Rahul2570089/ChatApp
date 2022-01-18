@@ -102,7 +102,6 @@ class _ConversationScreenState extends State<ConversationScreen> {
                           sendMessages();
                         },
                         backgroundColor: Colors.greenAccent,
-                        elevation: 0.0,
                       ),
                     ),
                   ],

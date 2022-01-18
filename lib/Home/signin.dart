@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mychatapp/helper/helper.dart';
 import 'package:mychatapp/services/auth.dart';
 import 'package:mychatapp/services/database.dart';
@@ -25,6 +26,7 @@ class _SignInState extends State<SignIn> {
   TextEditingController passwordEditer = TextEditingController();
   final AuthMethod authmethod = AuthMethod();
   QuerySnapshot? snapshot;
+
   
   InputDecoration textdecoration(String hint) {
     return InputDecoration(
@@ -72,6 +74,21 @@ class _SignInState extends State<SignIn> {
                       decoration: textdecoration("Password"),
                     ),
                     const SizedBox(height: 18,),
+                    GestureDetector(
+                    onTap: () {
+                      if(emailTextEditer.text.isNotEmpty) {
+                        AuthMethod().resetpassword(emailTextEditer.text);
+                        Fluttertoast.showToast(msg: "Email sent");
+                      }
+                      else {
+                        Fluttertoast.showToast(msg: "PLease enter email");
+                      } 
+                    },
+                    child: const Text("Forgot Password?",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline
+                    ),)
+                  ),
                     const SizedBox(height: 25,),
                     Container(
                       color: Colors.green,
@@ -123,14 +140,14 @@ class _SignInState extends State<SignIn> {
                         ),
                     ),
                     const SizedBox(height: 20,),
-                    GestureDetector(
-                      onTap: null,
-                      child: SizedBox(
-                        height: 60,
-                        width: 70,
-                        child: Image.asset("assets/gicon.png")
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: null,
+                    //   child: SizedBox(
+                    //     height: 60,
+                    //     width: 70,
+                    //     child: Image.asset("assets/gicon.png")
+                    //   ),
+                    // ),
                   ],
                 ),
                 )

@@ -22,8 +22,7 @@ class _SignUpState extends State<SignUp> {
   bool loading = false;
   final AuthMethod authmethod = AuthMethod();
   DataBaseMethods dataBaseMethods = DataBaseMethods();
-
-
+  
   InputDecoration textdecoration(String hint) {
     return InputDecoration(
       filled: true,
@@ -72,6 +71,7 @@ class _SignUpState extends State<SignUp> {
                     obscureText: true,
                     decoration: textdecoration("Password"),
                   ),
+                  const SizedBox(height: 20,),
                   const SizedBox(height: 25,),
                   Container(
                     color: Colors.green,
@@ -79,7 +79,6 @@ class _SignUpState extends State<SignUp> {
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       onPressed: () async {
-
 
                         if(check.currentState!.validate()) {
                           Map<String,String> userMap = {
@@ -118,14 +117,14 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  GestureDetector(
-                    onTap: null,
-                    child: SizedBox(
-                      height: 60,
-                      width: 70,
-                      child: Image.asset("assets/gicon.png")
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: null,
+                  //   child: SizedBox(
+                  //     height: 60,
+                  //     width: 70,
+                  //     child: Image.asset("assets/gicon.png")
+                  //   ),
+                  // ),
                 ],
               ),
             ),
