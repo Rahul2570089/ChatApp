@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: isuserloggedin ? const HomeScreen() : const Authenticate(),
+      title: "MyChatApp"
     );
   }
 }

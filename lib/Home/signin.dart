@@ -81,7 +81,7 @@ class _SignInState extends State<SignIn> {
                         Fluttertoast.showToast(msg: "Email sent");
                       }
                       else {
-                        Fluttertoast.showToast(msg: "PLease enter email");
+                        Fluttertoast.showToast(msg: "Please enter email");
                       } 
                     },
                     child: const Text("Forgot Password?",
