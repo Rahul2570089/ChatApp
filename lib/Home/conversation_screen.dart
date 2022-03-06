@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mychatapp/helper/constants.dart';
 import 'package:mychatapp/services/database.dart';
 
@@ -66,8 +67,15 @@ class _ConversationScreenState extends State<ConversationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.user!),
-        backgroundColor: Colors.green,
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.green[50]),
+        title: Text(widget.user!,style: const TextStyle(color: Colors.black),),
+        backgroundColor: Colors.green[50],
+          elevation: 0.0,
+          shadowColor: Colors.transparent,
+          centerTitle: true,
+          iconTheme: const IconThemeData(
+            color: Colors.green
+          ),
       ),
       body: Container(
         color: Colors.green[100],

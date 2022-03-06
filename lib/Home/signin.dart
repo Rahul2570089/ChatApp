@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mychatapp/helper/helper.dart';
 import 'package:mychatapp/services/auth.dart';
@@ -39,7 +40,7 @@ class _SignInState extends State<SignIn> {
         )),
         focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-          color: Colors.green,
+          color: Color.fromARGB(255, 243, 191, 46),
         )));
   }
 
@@ -47,8 +48,11 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign In"),
-        backgroundColor: Colors.green[300],
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.green[100]),
+        title: const Text("Sign In",style: TextStyle(color: Colors.black),),
+        backgroundColor: Colors.green[100],
+        elevation: 0.0,
+        centerTitle: true,
       ),
       backgroundColor: Colors.green[100],
       body: loading ? const Center(child: CircularProgressIndicator()) : Center(
@@ -62,16 +66,22 @@ class _SignInState extends State<SignIn> {
                   key: check,
                   child: Column (
                     children: [
-                    TextFormField(
-                      validator: (val) { return val!.isEmpty ? "Please enter the email" : null;},
-                      controller: emailTextEditer,
-                      decoration: textdecoration("Email"),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (val) { return val!.isEmpty ? "Please enter the email" : null;},
+                        controller: emailTextEditer,
+                        decoration: textdecoration("Email"),
+                      ),
                     ),
-                    TextFormField(
-                      validator: (val) { return val!.isEmpty ? "Please enter the password" : null;},
-                      controller: passwordEditer,
-                      obscureText: true,
-                      decoration: textdecoration("Password"),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (val) { return val!.isEmpty ? "Please enter the password" : null;},
+                        controller: passwordEditer,
+                        obscureText: true,
+                        decoration: textdecoration("Password"),
+                      ),
                     ),
                     const SizedBox(height: 18,),
                     GestureDetector(
@@ -90,8 +100,7 @@ class _SignInState extends State<SignIn> {
                     ),)
                   ),
                     const SizedBox(height: 25,),
-                    Container(
-                      color: Colors.green,
+                    SizedBox(
                       height: 50,
                       width: MediaQuery.of(context).size.width,
                       child: ElevatedButton(
@@ -120,16 +129,22 @@ class _SignInState extends State<SignIn> {
                           });
                         }
                     },
-                    
-                     
+                    style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.green),
+                          shadowColor: MaterialStateProperty.all(Colors.transparent),
+                          elevation: MaterialStateProperty.all(0),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)
+                              )
+                            )
+                      ),
                     child: const Text("Sign in",style: TextStyle(color: Colors.black87),),
                         ),
                     ),
                     const SizedBox(height: 25,),
                     const Text("Don't have account? Register below"),
                     const SizedBox(height: 25,),
-                    Container(
-                      color: Colors.green,
+                    SizedBox(
                       height: 50,
                       width: MediaQuery.of(context).size.width,
                       child: ElevatedButton(
@@ -137,6 +152,15 @@ class _SignInState extends State<SignIn> {
                           widget.toggle();
                         },
                         child: const Text("Sign up",style: TextStyle(color: Colors.black87),),
+                        style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.green),
+                              shadowColor: MaterialStateProperty.all(Colors.transparent),
+                              elevation: MaterialStateProperty.all(0),
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)
+                              )
+                            )
+                          ),
                         ),
                     ),
                     const SizedBox(height: 20,),

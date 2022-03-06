@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mychatapp/Home/conversation_screen.dart';
 import 'package:mychatapp/Home/search.dart';
 import 'package:mychatapp/helper/authenticate.dart';
@@ -64,9 +65,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+        backgroundColor: Colors.green[50],
         appBar: AppBar(
-          backgroundColor: Colors.greenAccent[400],
-          title: const Text("MyChatApp"),
+          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.green[50]),
+          title: const Text("MyChatApp",style: TextStyle(color: Colors.black),),
+          backgroundColor: Colors.green[50],
+          elevation: 0.0,
+          shadowColor: Colors.transparent,
+          centerTitle: true,
+          iconTheme: const IconThemeData(
+            color: Colors.green
+          ),
           actions: [
             GestureDetector(
               child: Container(
@@ -107,7 +116,7 @@ class ChatroomTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 16),
         width: MediaQuery.of(context).size.width,
-        color: Colors.green[50],
+        color: Colors.green[100],
         child: Row(
           children: [
             Container(

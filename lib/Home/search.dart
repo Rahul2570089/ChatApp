@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mychatapp/Home/conversation_screen.dart';
 import 'package:mychatapp/helper/constants.dart';
@@ -92,11 +93,17 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.greenAccent[400],
-        title: const Text("Search"),
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.green[100]),
+        title: const Text("Search",style: TextStyle(color: Colors.black),),
+        backgroundColor: Colors.green[100],
+        elevation: 0.0,
+        centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: Colors.green
+        ),
       ),
       body: Container(
-        color: Colors.green[50],
+        color: Colors.green[100],
         child: Column(
           children: [
             Container(

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mychatapp/Home/mainscreen.dart';
 import 'package:mychatapp/helper/helper.dart';
 import 'package:mychatapp/services/auth.dart';
@@ -34,7 +35,7 @@ class _SignUpState extends State<SignUp> {
         )),
         focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-          color: Colors.green,
+          color: Color.fromARGB(255, 243, 191, 46),
         )));
   }
 
@@ -42,8 +43,11 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign Up"),
-        backgroundColor: Colors.green[300],
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.green[100]),
+        title: const Text("Sign Up",style: TextStyle(color: Colors.black),),
+        backgroundColor: Colors.green[100],
+        elevation: 0.0,
+        centerTitle: true,
       ),
       backgroundColor: Colors.green[100],
       body: loading ? const Center(child: CircularProgressIndicator()): Center(
@@ -55,26 +59,34 @@ class _SignUpState extends State<SignUp> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFormField(
-                    validator: (val) {return val!.isEmpty ? "Please enter the username" : null;},
-                    controller: usernameTextEditer,
-                    decoration: textdecoration("Name"),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      validator: (val) {return val!.isEmpty ? "Please enter the username" : null;},
+                      controller: usernameTextEditer,
+                      decoration: textdecoration("Name"),
+                    ),
                   ),
-                  TextFormField(
-                    validator: (val) {return val!.isEmpty ? "Please enter the email" : null;},
-                    controller: emailTextEditer,
-                    decoration: textdecoration("Email"),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      validator: (val) {return val!.isEmpty ? "Please enter the email" : null;},
+                      controller: emailTextEditer,
+                      decoration: textdecoration("Email"),
+                    ),
                   ),
-                  TextFormField(
-                    validator: (val) {return val!.isEmpty ? "Please enter the password" : null;},
-                    controller: passwordEditer,
-                    obscureText: true,
-                    decoration: textdecoration("Password"),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      validator: (val) {return val!.isEmpty ? "Please enter the password" : null;},
+                      controller: passwordEditer,
+                      obscureText: true,
+                      decoration: textdecoration("Password"),
+                    ),
                   ),
                   const SizedBox(height: 20,),
                   const SizedBox(height: 25,),
-                  Container(
-                    color: Colors.green,
+                  SizedBox(
                     height: 50,
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
@@ -96,17 +108,23 @@ class _SignUpState extends State<SignUp> {
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen() ));
                           });
                         }
-
-
                     }, 
                     child: const Text("Sign up",style: TextStyle(color: Colors.black87),),
+                    style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.green),
+                              shadowColor: MaterialStateProperty.all(Colors.transparent),
+                              elevation: MaterialStateProperty.all(0),
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)
+                              )
+                            )
+                          ),
                     ),
                   ),
                   const SizedBox(height: 20,),
                   const Text("Already Registered? Sign In below"),
                   const SizedBox(height: 20,),
-                  Container(
-                    color: Colors.green,
+                  SizedBox(
                     height: 50,
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
@@ -114,6 +132,15 @@ class _SignUpState extends State<SignUp> {
                         widget.toggle();
                       },
                     child: const Text("Sign In",style: TextStyle(color: Colors.black87),),
+                    style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Colors.green),
+                              shadowColor: MaterialStateProperty.all(Colors.transparent),
+                              elevation: MaterialStateProperty.all(0),
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)
+                              )
+                            )
+                          ),
                     ),
                   ),
                   const SizedBox(height: 20,),
