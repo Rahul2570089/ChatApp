@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mychatapp/Home/mainscreen.dart';
 import 'package:mychatapp/helper/helper.dart';
 import 'package:mychatapp/services/auth.dart';
@@ -43,7 +42,6 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.green[100]),
         title: const Text("Sign Up",style: TextStyle(color: Colors.black),),
         backgroundColor: Colors.green[100],
         elevation: 0.0,

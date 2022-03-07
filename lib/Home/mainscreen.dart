@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mychatapp/Home/conversation_screen.dart';
 import 'package:mychatapp/Home/search.dart';
 import 'package:mychatapp/helper/authenticate.dart';
@@ -64,41 +63,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        backgroundColor: Colors.green[50],
-        appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.green[50]),
-          title: const Text("MyChatApp",style: TextStyle(color: Colors.black),),
+    return Scaffold(
           backgroundColor: Colors.green[50],
-          elevation: 0.0,
-          shadowColor: Colors.transparent,
-          centerTitle: true,
-          iconTheme: const IconThemeData(
-            color: Colors.green
+          appBar: AppBar(
+            title: const Text("MyChatApp",style: TextStyle(color: Colors.black),),
+            backgroundColor: Colors.green[50],
+            elevation: 0.0,
+            shadowColor: Colors.transparent,
+            centerTitle: true,
+            iconTheme: const IconThemeData(
+              color: Colors.green
+            ),
+            actions: [
+              GestureDetector(
+                child: Container(
+                  child: const Icon(Icons.logout),
+                  padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 9),
+                  ),
+                onTap: () {
+                  authMethod.signout();
+                  helpermethod.saveuserloggedinsharedpreference(false);
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const Authenticate()));
+                }
+                ) 
+            ],
           ),
-          actions: [
-            GestureDetector(
-              child: Container(
-                child: const Icon(Icons.logout),
-                padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 9),
-                ),
-              onTap: () {
-                authMethod.signout();
-                helpermethod.saveuserloggedinsharedpreference(false);
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const Authenticate()));
-              }
-              ) 
-          ],
-        ),
-        body: chatroomlist(),
-        floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.search),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)  => const Search()));
-            },
-            backgroundColor: Colors.greenAccent,
-          ),
-    );
+          body: chatroomlist(),
+          floatingActionButton: FloatingActionButton(
+              child: const Icon(Icons.search),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)  => const Search()));
+              },
+              backgroundColor: Colors.greenAccent,
+            ),
+      );
   }
 }
 

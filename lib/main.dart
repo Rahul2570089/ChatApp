@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:mychatapp/Home/mainscreen.dart';
 import 'package:mychatapp/helper/authenticate.dart';
 import 'package:mychatapp/helper/helper.dart';
@@ -7,6 +8,12 @@ import 'package:mychatapp/helper/helper.dart';
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
    await Firebase.initializeApp();
+   SystemChrome.setSystemUIOverlayStyle(
+     const SystemUiOverlayStyle(
+       statusBarColor: Colors.transparent,
+       statusBarBrightness: Brightness.light
+     )
+   );
    runApp(const MyApp());
 }
 
