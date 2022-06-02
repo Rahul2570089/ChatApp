@@ -15,3 +15,4 @@
 - Firstly, create your account if you don't have, on sign up page or if you already have account log in to your account to sign in page.
 - Click on the search button (floating button in bottom right) and search the name of the person you want to message.
 - Now you can send messages to that person.
+# ChatApp
