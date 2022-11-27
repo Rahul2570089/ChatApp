@@ -7,7 +7,15 @@ import 'package:mychatapp/helper/helper.dart';
 
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
+  await Firebase.initializeApp(options: const FirebaseOptions (
+      apiKey: "AIzaSyCJEVh9spVa-RkJLMLB5tTNdOvYdU9eilo",
+      authDomain: "chatapp-1816a.firebaseapp.com",
+      projectId: "chatapp-1816a",
+      storageBucket: "chatapp-1816a.appspot.com",
+      messagingSenderId: "949383318",
+      appId: "1:949383318:web:5bed8401884c54e65b12b7",
+      measurementId: "G-LQ2B244W7K"
+   ));
    SystemChrome.setSystemUIOverlayStyle(
      const SystemUiOverlayStyle(
        statusBarColor: Colors.transparent,
