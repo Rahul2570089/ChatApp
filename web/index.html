@@ -36,29 +36,6 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
 
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyCJEVh9spVa-RkJLMLB5tTNdOvYdU9eilo",
-      authDomain: "chatapp-1816a.firebaseapp.com",
-      projectId: "chatapp-1816a",
-      storageBucket: "chatapp-1816a.appspot.com",
-      messagingSenderId: "949383318",
-      appId: "1:949383318:web:b6a00176391ae2a85b12b7",
-      measurementId: "G-QE6FKBDE8G"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
 
   <script>
     var serviceWorkerVersion = null;
@@ -124,6 +101,32 @@
       loadMainDartJs();
     }
   </script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCJEVh9spVa-RkJLMLB5tTNdOvYdU9eilo",
+      authDomain: "chatapp-1816a.firebaseapp.com",
+      projectId: "chatapp-1816a",
+      storageBucket: "chatapp-1816a.appspot.com",
+      messagingSenderId: "949383318",
+      appId: "1:949383318:web:b6a00176391ae2a85b12b7",
+      measurementId: "G-QE6FKBDE8G"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
+
 </body>
 
 </html>

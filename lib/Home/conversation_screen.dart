@@ -11,7 +11,7 @@ class ConversationScreen extends StatefulWidget {
   const ConversationScreen(this.chatroomid,this.user, {Key? key}) : super(key: key);
 
   @override
-  _ConversationScreenState createState() => _ConversationScreenState();
+  State<ConversationScreen> createState() => _ConversationScreenState();
 }
 
 class _ConversationScreenState extends State<ConversationScreen> {

@@ -6,9 +6,8 @@ import 'package:mychatapp/helper/authenticate.dart';
 import 'package:mychatapp/helper/helper.dart';
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    name: "chatapp-1816a",
     options: const FirebaseOptions (
       apiKey: "AIzaSyCJEVh9spVa-RkJLMLB5tTNdOvYdU9eilo",
       authDomain: "chatapp-1816a.firebaseapp.com",
