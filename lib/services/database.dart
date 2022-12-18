@@ -34,7 +34,7 @@ class DataBaseMethods {
   }
 
   getConversationMsg(String chatroomid) async {
-    return FirebaseFirestore.instance.collection("chatroom").doc(chatroomid).collection("chats").orderBy("time").snapshots();
+    return FirebaseFirestore.instance.collection("chatroom").doc(chatroomid).collection("chats").orderBy("timeOrder").snapshots();
   }
 
   getChatRoom(String? username) async {

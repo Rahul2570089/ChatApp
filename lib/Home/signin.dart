@@ -149,7 +149,6 @@ class _SignInState extends State<SignIn> {
                         onPressed: () {
                           widget.toggle();
                         },
-                        child: const Text("Sign up",style: TextStyle(color: Colors.black87),),
                         style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(Colors.green),
                               shadowColor: MaterialStateProperty.all(Colors.transparent),
@@ -159,6 +158,7 @@ class _SignInState extends State<SignIn> {
                               )
                             )
                           ),
+                        child: const Text("Sign up",style: TextStyle(color: Colors.black87),),
                         ),
                     ),
                     const SizedBox(height: 20,),

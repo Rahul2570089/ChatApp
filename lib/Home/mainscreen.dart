@@ -77,8 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [
               GestureDetector(
                 child: Container(
-                  child: const Icon(Icons.logout),
                   padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 9),
+                  child: const Icon(Icons.logout),
                   ),
                 onTap: () {
                   authMethod.signout();
@@ -90,11 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: chatroomlist(),
           floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.search),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)  => const Search()));
               },
               backgroundColor: Colors.greenAccent,
+              child: const Icon(Icons.search),
             ),
       );
   }

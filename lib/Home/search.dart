@@ -125,12 +125,12 @@ class _SearchState extends State<Search> {
                     height: 40,
                     width: 40,
                     child: FloatingActionButton(
-                      child: const Icon(Icons.search),
                       onPressed: () {
                       initiatesearch();
                       },
                       backgroundColor: Colors.greenAccent,
                       elevation: 0.0,
+                      child: const Icon(Icons.search),
                     ),
                   ),
                 ],

@@ -1,14 +1,14 @@
-// ignore_for_file: non_constant_identifier_names, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, must_be_immutable
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mychatapp/helper/constants.dart';
 import 'package:mychatapp/services/database.dart';
+import 'package:encryptor/encryptor.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class ConversationScreen extends StatefulWidget {
   final String chatroomid;
-  String? user;
-  ConversationScreen(this.chatroomid,this.user);
+  final String user;
+  const ConversationScreen(this.chatroomid,this.user, {Key? key}) : super(key: key);
 
   @override
   _ConversationScreenState createState() => _ConversationScreenState();
@@ -19,7 +19,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
   TextEditingController textEditingController = TextEditingController();
   Stream? chatmsg;
 
-  Widget ChatMessageList() {
+  String? key;
+
+  Widget chatMessageTile() {
     return StreamBuilder(
       stream: chatmsg,
       builder: (context,snapshot) {
@@ -30,7 +32,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
           itemCount: (snapshot.data as QuerySnapshot).docs.length,
           itemBuilder: (context,index) {
             return MessageTile(
-              (snapshot.data as QuerySnapshot).docs[index]["message"],
+              Encryptor.decrypt(key.toString(), (snapshot.data as QuerySnapshot).docs[index]["message"]).toString(),
               (snapshot.data as QuerySnapshot).docs[index]["sender"] == constants.name 
             );
           }
@@ -42,9 +44,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
   sendMessages() {
     if(textEditingController.text.isNotEmpty) {
       Map<String,dynamic> msgmap = {
-        "message" : textEditingController.text,
+        "message" : Encryptor.encrypt(key.toString(), textEditingController.text),
         "sender" : constants.name,
-        "time" : DateTime.now().millisecondsSinceEpoch
+        "time" : "${DateTime.now().hour}:${DateTime.now().minute}",
+        "timeOrder" : DateTime.now().millisecondsSinceEpoch,
       };
     dataBaseMethods.addConversationMsg(widget.chatroomid, msgmap);
     textEditingController.text = "";
@@ -54,6 +57,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   void initState() {
     super.initState();
+    key = encrypt.Key.fromUtf8(widget.chatroomid).toString();
     dataBaseMethods.getConversationMsg(widget.chatroomid).then((val) {
       setState(() {
         chatmsg = val;
@@ -66,7 +70,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.user!,style: const TextStyle(color: Colors.black),),
+        title: Text(widget.user,style: const TextStyle(color: Colors.black),),
         backgroundColor: Colors.green[50],
           elevation: 0.0,
           shadowColor: Colors.transparent,
@@ -79,7 +83,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
         color: Colors.green[100],
         child: Stack(
           children: [
-            ChatMessageList(),
+            chatMessageTile(),
             Container(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -104,11 +108,11 @@ class _ConversationScreenState extends State<ConversationScreen> {
                       width: 40,
                       child: FloatingActionButton(
                         elevation: 0.0,
-                        child: const Icon(Icons.send,),
                         onPressed: () {
                           sendMessages();
                         },
                         backgroundColor: Colors.greenAccent,
+                        child: const Icon(Icons.send,),
                       ),
                     ),
                   ],
@@ -124,7 +128,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
 class MessageTile extends StatelessWidget {
   final String msg;
   final bool sender;
-  MessageTile(this.msg,this.sender);
+  const MessageTile(this.msg,this.sender, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
