@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mychatapp/encryption/abstract_encryption.dart';
+import 'package:mychatapp/encryption/encryption_service.dart';
 import 'package:mychatapp/helper/constants.dart';
 import 'package:mychatapp/services/database.dart';
-import 'package:encryptor/encryptor.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 
 class ConversationScreen extends StatefulWidget {
@@ -18,8 +19,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
   DataBaseMethods dataBaseMethods = DataBaseMethods();
   TextEditingController textEditingController = TextEditingController();
   Stream? chatmsg;
+  AbstractEncryption encryptionService = EncryptionService(encrypt.Encrypter(encrypt.AES(encrypt.Key.fromLength(32))));
 
-  String? key;
+  // String? key;
 
   Widget chatMessageTile() {
     return StreamBuilder(
@@ -32,7 +34,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
           itemCount: (snapshot.data as QuerySnapshot).docs.length,
           itemBuilder: (context,index) {
             return MessageTile(
-              Encryptor.decrypt(key.toString(), (snapshot.data as QuerySnapshot).docs[index]["message"]).toString(),
+              encryptionService.decrypt((snapshot.data as QuerySnapshot).docs[index]["message"]),
               (snapshot.data as QuerySnapshot).docs[index]["sender"] == constants.name 
             );
           }
@@ -44,7 +46,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   sendMessages() {
     if(textEditingController.text.isNotEmpty) {
       Map<String,dynamic> msgmap = {
-        "message" : Encryptor.encrypt(key.toString(), textEditingController.text),
+        "message" : encryptionService.encrypt(textEditingController.text),
         "sender" : constants.name,
         "time" : "${DateTime.now().hour}:${DateTime.now().minute}",
         "timeOrder" : DateTime.now().millisecondsSinceEpoch,
@@ -57,7 +59,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   void initState() {
     super.initState();
-    key = encrypt.Key.fromUtf8(widget.chatroomid).toString();
+    // key = encrypt.Key.fromUtf8(widget.chatroomid).toString();
     dataBaseMethods.getConversationMsg(widget.chatroomid).then((val) {
       setState(() {
         chatmsg = val;
