@@ -19,7 +19,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   DataBaseMethods dataBaseMethods = DataBaseMethods();
   TextEditingController textEditingController = TextEditingController();
   Stream? chatmsg;
-  AbstractEncryption encryptionService = EncryptionService(encrypt.Encrypter(encrypt.AES(encrypt.Key.fromLength(32))));
+  AbstractEncryption encryptionService = EncryptionService(encrypt.Encrypter(encrypt.AES(encrypt.Key.fromLength(32), padding: null)));
 
   // String? key;
 
@@ -46,7 +46,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   sendMessages() {
     if(textEditingController.text.isNotEmpty) {
       Map<String,dynamic> msgmap = {
-        "message" : encryptionService.encrypt(textEditingController.text),
+        "message" : encryptionService.encrypt(textEditingController.text.trim()),
         "sender" : constants.name,
         "time" : "${DateTime.now().hour}:${DateTime.now().minute}",
         "timeOrder" : DateTime.now().millisecondsSinceEpoch,
